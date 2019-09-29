@@ -248,7 +248,7 @@
                 
               
 
-              <time title="创建时间：2019-09-30 00:17:58 / 修改时间：00:40:01" itemprop="dateCreated datePublished" datetime="2019-09-30T00:17:58+08:00">2019-09-30</time>
+              <time title="创建时间：2019-09-30 00:17:58 / 修改时间：00:56:07" itemprop="dateCreated datePublished" datetime="2019-09-30T00:17:58+08:00">2019-09-30</time>
             </span>
           
             
@@ -292,22 +292,23 @@
 <h1 id="分析过程"><a href="#分析过程" class="headerlink" title="分析过程"></a>分析过程</h1><h2 id="数据探索性分析"><a href="#数据探索性分析" class="headerlink" title="数据探索性分析"></a>数据探索性分析</h2><p>data文件夹下有两张表，表1<code>air_data.csv</code>为会员档案信息及其乘坐航班记录，表2 为表1各字段说明</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">data_file = <span class="string">'../data/air_data.csv'</span> <span class="comment">#原始数据表</span></span><br><span class="line">data = pd.read_csv(data_file, encoding = <span class="string">'utf-8'</span>)</span><br><span class="line">data.head()<span class="comment">#查看导入的数据</span></span><br></pre></td></tr></table></figure>
 
+<p><img src="1.png" alt></p>
+<img src="/2019/09/30/航空公司客户价值分析/1.png">
 
-
-
+<img src="/2019/09/30/航空公司客户价值分析/2.png">
 
 <p>可以看到共有44个字段，62988条记录，部分字段有缺失。</p>
 <p>使用pandas-profiling package可以快速生成数据的详细报告</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas_profiling  </span><br><span class="line">pandas_profiling.ProfileReport(data)</span><br></pre></td></tr></table></figure>
 
 <p>数据集的概述</p>
-
+<img src="/2019/09/30/航空公司客户价值分析/3.png">
 
 <p>对各字段进行分析，字段为numeric则会进行描述统计分析，直方图，频率等一系列分析。若字段为categorical，则会分析频率，做条形图</p>
-
+<img src="/2019/09/30/航空公司客户价值分析/4.png">
 
 <p>份析各字段相关性</p>
-
+<img src="/2019/09/30/航空公司客户价值分析/5.png">
 
 <p>将报告保存为HTML放在temp文件夹下</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">profile = pandas_profiling.ProfileReport(data)</span><br><span class="line">profile.to_file(outputfile=<span class="string">'../temp/air_report.html'</span>)</span><br></pre></td></tr></table></figure>
@@ -375,10 +376,10 @@
 
 <h3 id="2-数据可视化"><a href="#2-数据可视化" class="headerlink" title="2.数据可视化"></a>2.数据可视化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib as mlb</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">plt.rcParams[&apos;font.sans-serif&apos;] = [&apos;SimHei&apos;]</span><br><span class="line">plt.rcParams[&apos;axes.unicode_minus&apos;] = False</span><br><span class="line"></span><br><span class="line">plt.bar(kmeansResult[&apos;Class&apos;],kmeansResult[&apos;Num&apos;],color=&apos;rgby&apos;)</span><br><span class="line">plt.title(u&apos;五类群体的数量分布&apos;)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br><span class="line">%matplotlib inline</span><br></pre></td></tr></table></figure>
 
-
+<img src="/2019/09/30/航空公司客户价值分析/bar.png">
 
 <p>用excel绘制出5类客户的群体特征分布</p>
-
+<img src="/2019/09/30/航空公司客户价值分析/radar.png">
 
 <p>分析： （这里可能群体的标签会改变，因为每次聚类的结果不太相同，但不影响）<br>群体1的C属性上最大</p>
 <p>群体2的L、C属性最小</p>
