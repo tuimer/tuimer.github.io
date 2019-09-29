@@ -62,10 +62,17 @@
 <meta property="og:site_name" content="花季少女秃头记">
 <meta property="og:description" content="说明： 我是windows10 环境，cmd命令行 参考了这两篇文章，感谢！ https://zhuanlan.zhihu.com/p/25729240 https://xuanwo.io/2015/03/26/hexo-intor/ 准备准备好如下软件 安装node.js  安装git  根据自己电脑系统版本32位或64位下载最新安装软件，保持默认设置，一路next下来，安装完成 检查一下要求的">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/09/20/hexo%20+%20github%20搭建个人博客/0.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/20/hexo%20+%20github%20搭建个人博客/repository.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/20/hexo%20+%20github%20搭建个人博客/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/20/hexo%20+%20github%20搭建个人博客/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/20/hexo%20+%20github%20搭建个人博客/hexo-first-time.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/20/hexo%20+%20github%20搭建个人博客/images.jpg">
 <meta property="og:updated_time" content="2019-09-21T02:12:16.569Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo+github免费搭建个人博客">
 <meta name="twitter:description" content="说明： 我是windows10 环境，cmd命令行 参考了这两篇文章，感谢！ https://zhuanlan.zhihu.com/p/25729240 https://xuanwo.io/2015/03/26/hexo-intor/ 准备准备好如下软件 安装node.js  安装git  根据自己电脑系统版本32位或64位下载最新安装软件，保持默认设置，一路next下来，安装完成 检查一下要求的">
+<meta name="twitter:image" content="http://yoursite.com/2019/09/20/hexo%20+%20github%20搭建个人博客/0.png">
   <link rel="canonical" href="http://yoursite.com/2019/09/20/hexo + github 搭建个人博客/">
 
 
@@ -303,7 +310,7 @@
 <p>运行cmd命令行，依次输入 如下命令，以检查版本号的形式来检查软件是否安装好了</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br><span class="line">git --version</span><br></pre></td></tr></table></figure>
 
-
+<img src="/2019/09/20/hexo%20+%20github%20搭建个人博客/0.png">
 
 <p>如图输入命令后均出现了相应版本号，说明安装好了</p>
 <h3 id="准备GitHub"><a href="#准备GitHub" class="headerlink" title="准备GitHub"></a>准备GitHub</h3><ul>
@@ -317,18 +324,18 @@
 <p>登录GitHub后创建一个repository </p>
 </li>
 </ul>
-  
+  <img src="/2019/09/20/hexo%20+%20github%20搭建个人博客/repository.png">
 
 <p>Github将会自动替你创建出一个页面。 如果你的配置没有问题，那么<code>yourname.github.io</code>这个网址就可以正常访问了~ 如果<code>yourname.github.io</code>已经可以正常访问了，那么Github一侧的配置已经全部结束了。</p>
 <h2 id="配置Hexo"><a href="#配置Hexo" class="headerlink" title="配置Hexo"></a>配置Hexo</h2><h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><p>在自己喜欢的位置创建一个文件夹，在文件夹内按住<code>shift+鼠标右键</code> 选择在此处打开命令行窗口（或者cd到此文件夹）此后操作在命令行中进行</p>
 <p>输入命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
 
-
+<img src="/2019/09/20/hexo%20+%20github%20搭建个人博客/1.png">
 
 <p>就可以看到在下载了</p>
 <p>下载完</p>
-
+<img src="/2019/09/20/hexo%20+%20github%20搭建个人博客/2.png">
 
 <p>有两个<code>WARN</code>不必惊慌，然后输入</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm insrall hexo --save</span><br></pre></td></tr></table></figure>
@@ -346,7 +353,7 @@
 
 <p>提示：<code>INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.</code> </p>
 <p>就可以在浏览器通过 <a href="https:localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a>访问了，可以看到</p>
-
+<img src="/2019/09/20/hexo%20+%20github%20搭建个人博客/hexo-first-time.png" title="hexo初始页">
 
 
 
@@ -388,7 +395,7 @@
 <p>等待，中途会让你登录你的GitHub，登录就是了，完成后再进入  <code>username.github.io</code>j就可以看到你的文章了，别人也可以通过以上网址看到你的博客了，</p>
 <p>到此完成了博客搭建，可再进行主题更换和一些美化和调整</p>
 <p>它就是你的小可爱了，多多探索调教哦~</p>
-
+<img src="/2019/09/20/hexo%20+%20github%20搭建个人博客/images.jpg">
 
 
     </div>
