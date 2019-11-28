@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="一、分析背景和目的1.1背景Airbnb成立于2008年，现已时间成为了短租民宿行业的巨头，并且强烈冲击着传统酒店行业的格局，Arbnb作为一款社区平台类产品，其业务遍布191个国家，并且经常出现在商业分析的优秀案例中，Airbnb在做好了产品体验，房源美感，名宿共享服务后，这款产品和背后的业务是否存在可以改进的地方？ 1.2 提出分析问题一款好的产品的发展必然伴随着不断的迭代在AARRR模型中，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Airbnb用户及业务数据分析">
+<meta property="og:url" content="http://yoursite.com/2019/11/28/Airbnb用户及业务数据分析/index.html">
+<meta property="og:site_name" content="花季少女秃头记">
+<meta property="og:description" content="一、分析背景和目的1.1背景Airbnb成立于2008年，现已时间成为了短租民宿行业的巨头，并且强烈冲击着传统酒店行业的格局，Arbnb作为一款社区平台类产品，其业务遍布191个国家，并且经常出现在商业分析的优秀案例中，Airbnb在做好了产品体验，房源美感，名宿共享服务后，这款产品和背后的业务是否存在可以改进的地方？ 1.2 提出分析问题一款好的产品的发展必然伴随着不断的迭代在AARRR模型中，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13996932-278b24375b8935e3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13996932-61e5b53ed39b13f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13996932-8c57478d6bb559d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13996932-574b18719ecf91db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13996932-bea7b8a295c7d794.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13996932-901fabe8ae10e23b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13996932-267c2943084cf253.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13996932-bb401ee3fe12df93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13996932-285343360dbe50f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13996932-09563e69f12d7b55.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13996932-9ed7d60a8df5b83f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13996932-0193f91150163db5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-11-28T01:52:13.222Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Airbnb用户及业务数据分析">
+<meta name="twitter:description" content="一、分析背景和目的1.1背景Airbnb成立于2008年，现已时间成为了短租民宿行业的巨头，并且强烈冲击着传统酒店行业的格局，Arbnb作为一款社区平台类产品，其业务遍布191个国家，并且经常出现在商业分析的优秀案例中，Airbnb在做好了产品体验，房源美感，名宿共享服务后，这款产品和背后的业务是否存在可以改进的地方？ 1.2 提出分析问题一款好的产品的发展必然伴随着不断的迭代在AARRR模型中，">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/13996932-278b24375b8935e3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  <link rel="canonical" href="http://yoursite.com/2019/11/28/Airbnb用户及业务数据分析/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Airbnb用户及业务数据分析 | 花季少女秃头记</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">花季少女秃头记</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">一步一步 做大做强 再创辉煌</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/tuimer" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/28/Airbnb用户及业务数据分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="分叉的小腿毛">
+      <meta itemprop="description" content="转行数据分析|啥都想学型选手">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="花季少女秃头记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Airbnb用户及业务数据分析
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-28 09:32:45 / 修改时间：09:52:13" itemprop="dateCreated datePublished" datetime="2019-11-28T09:32:45+08:00">2019-11-28</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="一、分析背景和目的"><a href="#一、分析背景和目的" class="headerlink" title="一、分析背景和目的"></a>一、分析背景和目的</h2><h3 id="1-1背景"><a href="#1-1背景" class="headerlink" title="1.1背景"></a>1.1背景</h3><p>Airbnb成立于2008年，现已时间成为了短租民宿行业的巨头，并且强烈冲击着传统酒店行业的格局，Arbnb作为一款社区平台类产品，其业务遍布191个国家，并且经常出现在商业分析的优秀案例中，Airbnb在做好了产品体验，房源美感，名宿共享服务后，这款产品和背后的业务是否存在可以改进的地方？</p>
+<h3 id="1-2-提出分析问题"><a href="#1-2-提出分析问题" class="headerlink" title="1.2 提出分析问题"></a>1.2 提出分析问题</h3><p>一款好的产品的发展必然伴随着不断的迭代<br>在AARRR模型中，第一个A——用户获取，提高新用户获取的数量和质量是不断监测并优化的一个工作，哪些渠道的效果好，企业就要及时调整和增加此渠道的投入，哪些渠道效果不理想，就要及时找出原因并给出解决方案（<strong>渠道分析</strong>）<br>此外，转化漏斗分析也是数据分析环节的重要指标，可以从宏观角度了解整个产品的转化情况，企业针对流失率较高的漏斗环节进行改进，可以更有效的促进业务的发展（<strong>转化漏斗分析</strong>）</p>
+<p>针对以上分析目的，提出以下三个问题：</p>
+<ol>
+<li>Airbnb的目前用户群体的特征？（<strong>用户特征分析</strong>）</li>
+<li>Airbnb当前的推广渠道有哪些是优质的？有哪些是做的不好的且需要改进？（<strong>渠道分析</strong>）</li>
+<li>当前转化率和流失率中哪一个环节存在问题，或者说有较大进步空间？（<strong>转化漏斗分析</strong>）</li>
+</ol>
+<h2 id="二、分析维度"><a href="#二、分析维度" class="headerlink" title="二、分析维度"></a>二、分析维度</h2><h3 id="2-1-根据问题设立分析维度"><a href="#2-1-根据问题设立分析维度" class="headerlink" title="2.1 根据问题设立分析维度"></a>2.1 根据问题设立分析维度</h3><p>根据问题，提出三个分析维度：<br>用户画像分析<br>推广渠道分析<br>转化漏斗分析</p>
+<h3 id="2-2各维度分析指标"><a href="#2-2各维度分析指标" class="headerlink" title="2. 2各维度分析指标"></a>2. 2各维度分析指标</h3><ol>
+<li>用户画像分析</li>
+</ol>
+<ul>
+<li>用户性别的分布特征；</li>
+<li>用户年龄的分布特征；</li>
+<li>用户地区的分布特征。<br><strong>ps</strong>:<em>不同的产品对客户的不同属性敏感度不同，比如有些产品依赖于客户的学历/收入/行业等，此时对客户进行客户画像分析就需要加入这些维度的数据，使客户画像更清晰，更有价值</em></li>
+</ul>
+<ol start="2">
+<li>推广渠道分析</li>
+</ol>
+<ul>
+<li>每月新增用户</li>
+<li>不同用户端的注册量</li>
+<li>不同推广渠道的注册量</li>
+<li>不同营销内容的注册量</li>
+<li>不同推广渠道的转化率</li>
+<li>不同营销内容的转化率</li>
+</ul>
+<ol start="3">
+<li>转化漏斗分析</li>
+</ol>
+<ul>
+<li>注册用户占比</li>
+<li>活跃用户占比</li>
+<li>下单用户占比</li>
+<li>实际支付用户占比</li>
+<li>复购用户占比</li>
+</ul>
+<h2 id="三、数据清洗"><a href="#三、数据清洗" class="headerlink" title="三、数据清洗"></a>三、数据清洗</h2><h3 id="3-1-数据集描述"><a href="#3-1-数据集描述" class="headerlink" title="3.1 数据集描述"></a>3.1 数据集描述</h3><p>数据集名称: airbnb-recruiting-new-user-bookings<br>数据集来源：<a href="https://www.kaggle.com/c/airbnb-recruiting-new-user-bookings/data" target="_blank" rel="noopener">https://www.kaggle.com/c/airbnb-recruiting-new-user-bookings/data</a><br>数据集简介：此数据集使kaggle上的一个竞赛项目，主要用来制作目的地信息预测模型，此数据集住主要包含两张数据表，其中user表为用户数据，session为行为数据<br>数据集大小：<br>213451 * 16(user)、<br>10567737 * 6(sessions)</p>
+<p>熟悉数据：</p>
+<p>###用户表<br>id:用户ID<br>date_account_created:账户创建日期<br>timestamp_first_active:账户首次活跃时间戳（可能早于账户创建时间和首次预定日期）<br>date_first_booking：账户首次预定日期<br>‘gender’：性别<br>‘age’：年龄<br>‘signup_method’:注册方式<br>‘signup_flow’：用户注册时的来源页面<br>‘language’：用户语言偏好<br>‘affiliate_channel’：付费营销类型<br>‘affiliate_provider’：引流供应商<br>‘first_affiliate_tracked’:首次认知引流追踪（注册前与用户交互的第一个营销手段）<br>‘signup_app’：注册来源<br>‘first_device_type’：首次来访设备<br>‘first_browser’：首次浏览器<br>‘country_destination’：目的国家</p>
+<p>###session表（用户web会话日志）<br>user_id: 与用户表中的“id”列关联<br>action：动作（浏览，搜索、<br>action_type：动作类型（点击、<br>action_detail：动作细节<br>device_type：会话使用设备<br>secs_elapsed：持续时间</p>
+<h3 id="3-2-重复值处理"><a href="#3-2-重复值处理" class="headerlink" title="3.2 重复值处理"></a>3.2 重复值处理</h3><p>用户表中，每个用户生成一条记录，所以需排查id字段是否重复，<br><img src="https://upload-images.jianshu.io/upload_images/13996932-278b24375b8935e3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="重复数据"><br>经过查看无重复，不需要处理重复值</p>
+<h3 id="3-3缺失值处理"><a href="#3-3缺失值处理" class="headerlink" title="3.3缺失值处理"></a>3.3缺失值处理</h3><p>经查看缺失情况如下<br><img src="https://upload-images.jianshu.io/upload_images/13996932-61e5b53ed39b13f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="缺失数据"></p>
+<p><strong>缺失原因推测及处理</strong></p>
+<ul>
+<li>date_first_booking(首次预定日期）存在较多缺失，可以推测是因为客户还未下单</li>
+<li>age年龄缺失是因为客户未填写这部分信息</li>
+<li>first_device_type 注册来源渠道缺失是前端未追踪到这部分信息<br><strong>处理</strong><br>其他字段都很完整，后续是对每个字段进行统计分析，所以 保留有缺失的记录，在统计时对字段分别进行值和缺失的统计</li>
+</ul>
+<h3 id="3-3-异常值处理"><a href="#3-3-异常值处理" class="headerlink" title="3.3 异常值处理"></a>3.3 异常值处理</h3><ol>
+<li><strong>‘age’</strong>字段存在的异常数据很多，年龄大于100的有2K多条记录，还存在一部分，2013，2014这种年份数据，推测这些脏数据是用户随意填写造成</li>
+</ol>
+<ul>
+<li>处理：将年龄小于7或大于75的数据统一设为0</li>
+</ul>
+<ol start="2">
+<li><strong>‘gender’</strong>字段存在大量‘-unkonw-’和‘-’可以看作这些性别数据，客户未填写</li>
+</ol>
+<ul>
+<li>处理：将‘-unknown-’和‘-‘统一为’-unknown-‘</li>
+</ul>
+<h2 id="四、用户画像分析"><a href="#四、用户画像分析" class="headerlink" title="四、用户画像分析"></a>四、用户画像分析</h2><p>用户特征分为<strong>用户特点</strong>和<strong>用户行为</strong><br>用户特点：人口统计信息，性格爱好，需求特征等<br>用户行为：频率，习惯，消费等</p>
+<h3 id="4-1用户的性别分布特征"><a href="#4-1用户的性别分布特征" class="headerlink" title="4.1用户的性别分布特征"></a>4.1用户的性别分布特征</h3><p><img src="https://upload-images.jianshu.io/upload_images/13996932-8c57478d6bb559d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="用户性别占比"></p>
+<p>对gender字段进行统计，未知占45.0%，女性占比29.5%，男性占比25.5%<br>可以看出，男女用户占比差别不大，男性用户比女性用户多4%</p>
+<h3 id="4-2-用户年龄分布"><a href="#4-2-用户年龄分布" class="headerlink" title="4.2 用户年龄分布"></a>4.2 用户年龄分布</h3><p><img src="https://upload-images.jianshu.io/upload_images/13996932-574b18719ecf91db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="年龄分布"><br>从年龄分布的直方图中可以看出：<br>Airbnb的用户主要为“青中年”群体，其中用户数量最多的是80后（29岁~39岁）其次是90后，然后是70后。</p>
+<h3 id="4-3-用户地区分布"><a href="#4-3-用户地区分布" class="headerlink" title="4.3 用户地区分布"></a>4.3 用户地区分布</h3><p>（绘制语言树状图）<br><img src="https://upload-images.jianshu.io/upload_images/13996932-bea7b8a295c7d794.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="用户使用语言"></p>
+<ul>
+<li>airbnb产品遍布多个地区</li>
+<li>有超过96%的用户是英语国家（欧美），airbnb是2013年开始进入中国市场（此数据集采集止于2014年）所以此时中文用户数量排第二，但占比还是较小。</li>
+</ul>
+<h2 id="五、流量渠道分析"><a href="#五、流量渠道分析" class="headerlink" title="五、流量渠道分析"></a>五、流量渠道分析</h2><h3 id="5-1-每月新增用户"><a href="#5-1-每月新增用户" class="headerlink" title="5.1 每月新增用户"></a>5.1 每月新增用户</h3><p>（流量增长趋势图）<br><img src="https://upload-images.jianshu.io/upload_images/13996932-901fabe8ae10e23b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="每月新增用户趋势"></p>
+<ul>
+<li>airbnb的用户增长曲线健康，前期（2011年之前）增长平缓，2012年2月之后开始快速增长。</li>
+<li>此产品的新用户增长存在<strong>季节性规律</strong>：每年的7~10月份产品会迎来用户增长的高峰，推测为夏季（北半球）是旅游的旺季，而短租类产品正好是旅行消费的一种。</li>
+</ul>
+<h3 id="5-2不同用户端的注册量"><a href="#5-2不同用户端的注册量" class="headerlink" title="5.2不同用户端的注册量"></a>5.2不同用户端的注册量</h3><p><img src="https://upload-images.jianshu.io/upload_images/13996932-267c2943084cf253.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不同客户端注册量"></p>
+<ul>
+<li>用户主要使用电脑桌面客户端进行的注册，可能2014年手机并没有现在普及</li>
+<li>客户主要使用苹果设备</li>
+</ul>
+<h3 id="5-3不同推广渠道的注册量及转化率"><a href="#5-3不同推广渠道的注册量及转化率" class="headerlink" title="5.3不同推广渠道的注册量及转化率"></a>5.3不同推广渠道的注册量及转化率</h3><ul>
+<li>总体情况<br><img src="https://upload-images.jianshu.io/upload_images/13996932-bb401ee3fe12df93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不同渠道拉新及转化"></li>
+<li>direct（直接注册）的注册量最多，而我们主要分析目的是分析推广渠道的优劣，后续分析中排除direct</li>
+</ul>
+<p><strong>将分析聚焦到注册量大于300的营销渠道上</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13996932-285343360dbe50f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不同营销渠道拉新及转化"></p>
+<h4 id="5-3-1渠道拉新方面"><a href="#5-3-1渠道拉新方面" class="headerlink" title="5.3.1渠道拉新方面"></a>5.3.1渠道拉新方面</h4><ul>
+<li>推广渠道上，拉新量前7个渠道(共37个渠道）的注册量占总推广渠道来源的87%，符合二八法则</li>
+<li>表现最好的是Google的品牌竞价（sem）渠道，Google的非品牌竞价的注册量紧随其后居拉新第二位</li>
+</ul>
+<h4 id="5-3-2渠道转化率方面"><a href="#5-3-2渠道转化率方面" class="headerlink" title="5.3.2渠道转化率方面"></a>5.3.2渠道转化率方面</h4><ul>
+<li>整体渠道转化率均不错，多数渠道的转化率都在30%以上</li>
+<li>主要渠道（注册量前7名的渠道）中，Google_content的转化率存在异常，转化率为15.6%，明显低于其他主要渠道的转化率</li>
+<li>other_api、google_seo、other_other三个渠道转化率表现优秀，均大于40%</li>
+</ul>
+<p>##5.4 不同营销内容的注册量及转化率<br><img src="https://upload-images.jianshu.io/upload_images/13996932-09563e69f12d7b55.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li>注册量排名第一的营销内容为untracked(未跟踪到)，以及部份追踪数据为NULL，产品的数据跟踪异常</li>
+</ul>
+<p><strong>将分析聚焦到有追踪数据的营销内容上</strong><br><img src="https://upload-images.jianshu.io/upload_images/13996932-9ed7d60a8df5b83f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="5-3-3-营销内容注册量方面"><a href="#5-3-3-营销内容注册量方面" class="headerlink" title="5.3.3 营销内容注册量方面"></a>5.3.3 营销内容注册量方面</h4><ul>
+<li>从追踪到的数据来看，linked和omg的注册量和转化率均表现优异，两者带来的注册量占总营销内容来带的注册量的90%以上</li>
+</ul>
+<h4 id="5-3-4-营销内容转化率方面"><a href="#5-3-4-营销内容转化率方面" class="headerlink" title="5.3.4 营销内容转化率方面"></a>5.3.4 营销内容转化率方面</h4><ul>
+<li>整体上转化率表现不错，除local ops 其他营销内容的转化率均在34以上</li>
+<li>marketing转化率达45%</li>
+</ul>
+<h2 id="六、转化漏斗分析"><a href="#六、转化漏斗分析" class="headerlink" title="六、转化漏斗分析"></a>六、转化漏斗分析</h2><p>对session表的user_id进行统计，此次进行用户分析的总用户数为：135484</p>
+<h3 id="6-1活跃用户占比"><a href="#6-1活跃用户占比" class="headerlink" title="6.1活跃用户占比"></a>6.1活跃用户占比</h3><p>定义活跃用户为操作产品的次数大于10次的用户<br>活跃用户数为：111386<br>活跃用户占比= 活跃用户数/用户总数 = 82.2%</p>
+<h3 id="6-2-注册用户占比"><a href="#6-2-注册用户占比" class="headerlink" title="6.2 注册用户占比"></a>6.2 注册用户占比</h3><p>注册用户数量：73815<br>注册用户占比 = 注册用户数/总用户数 = 54.4%</p>
+<h3 id="6-3下单用户占比"><a href="#6-3下单用户占比" class="headerlink" title="6.3下单用户占比"></a>6.3下单用户占比</h3><p>下单用户数：10367<br>下单用户占比= 下单用户数量/总用户数量 = 7.7%</p>
+<h3 id="6-4实际支付用户占比"><a href="#6-4实际支付用户占比" class="headerlink" title="6.4实际支付用户占比"></a>6.4实际支付用户占比</h3><p>实际支付用户总数量 ：9019<br>付款用户占比 =实际支付用户总数量/用户总数量 = 6.7%</p>
+<h3 id="6-5复购用户占比"><a href="#6-5复购用户占比" class="headerlink" title="6.5复购用户占比"></a>6.5复购用户占比</h3><p>复购用户总数量 ：5447<br>复购用户占比 = 复购用户总数量 / 用户总数量 = 4.0204%<br><img src="https://upload-images.jianshu.io/upload_images/13996932-0193f91150163db5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="用户转化漏斗"></p>
+<ul>
+<li>从转化漏斗图可以看出，注册用户到下单的转化率为14.0%，流失率较高</li>
+<li>活跃用户的注册率为66.3%，可进一步提高</li>
+<li>下单到实际支付有约13.0%的流失</li>
+<li>复购率达60.4%，表现良好</li>
+</ul>
+<h2 id="七、分析结论汇总"><a href="#七、分析结论汇总" class="headerlink" title="七、分析结论汇总"></a>七、分析结论汇总</h2><h3 id="7-1-用户画像"><a href="#7-1-用户画像" class="headerlink" title="7.1 用户画像"></a>7.1 用户画像</h3><ul>
+<li><strong>用户性别</strong>、从有性别记录的数据来看，用户中男女性别占比差别不大，男性比女性占比仅多4%</li>
+<li><strong>用户年龄</strong>、用户年龄段集中在青中年，最多的是80后，其次为90后，然后70后</li>
+<li><strong>用户分布</strong>、用户绝大部分来自使用英语的欧美国家，占比高达96%以上，其次是中国</li>
+</ul>
+<h3 id="7-2-流量渠道"><a href="#7-2-流量渠道" class="headerlink" title="7.2 流量渠道"></a>7.2 流量渠道</h3><ul>
+<li>2011年之前，用户增长缓慢，2012年开始用户迅速增长</li>
+<li>用户增长呈现一定季节性，7~10月份是旅游旺季，出现用户增长峰值</li>
+<li>PC端和移动端用户均是苹果产品占优势</li>
+<li>直接从应用市场下载注册的用户占64.4%</li>
+<li>排名前7的营销渠道（共38个渠道）的拉新占所用渠道拉新的90%以上</li>
+</ul>
+<p><strong>优质渠道</strong>：<br>Google的seo和seo_no_brand 拉新和转化都表现较好</p>
+<p><strong>表现不佳的渠道</strong>：</p>
+<ul>
+<li>Google的content转化出现异常，明显低于其他主要渠道较多</li>
+<li>other_api 转化率表现不佳</li>
+<li>各供应商的content渠道转化率都较低在10%左右，其中gsp的content渠道转化率最低，约8.2%</li>
+</ul>
+<p><strong>营销内容方面</strong>:</p>
+<ul>
+<li>前端统计功能异常，未追踪到的用户达50%以上</li>
+<li>linked和omg两个内容表现优异，带来的用户占所有营销内容带来的用户的90%以上</li>
+<li>local ops带来的转化率最低</li>
+</ul>
+<h3 id="7-3-转化漏斗"><a href="#7-3-转化漏斗" class="headerlink" title="7.3 转化漏斗"></a>7.3 转化漏斗</h3><ul>
+<li>airbnb用户转化漏斗中注册用户到下单这个环节的转化率仅14%</li>
+<li>活跃用户的注册率可以有进一步优化</li>
+<li>活跃和复购环节表现良好<br>#八、业务和产品上的建议</li>
+</ul>
+<h2 id="八、分析建议"><a href="#八、分析建议" class="headerlink" title="八、分析建议"></a>八、分析建议</h2><h3 id="8-1-关于用户画像方面"><a href="#8-1-关于用户画像方面" class="headerlink" title="8.1 关于用户画像方面"></a>8.1 关于用户画像方面</h3><ul>
+<li>根据用户年龄特征分布，建议投放广告时主要针对20~40岁年龄段的目标用户</li>
+<li>在用户年龄字段出现较多异常值，建议产品开发设置用户输入信息的验证</li>
+</ul>
+<h3 id="8-2-关于推广渠道上"><a href="#8-2-关于推广渠道上" class="headerlink" title="8.2 关于推广渠道上"></a>8.2 关于推广渠道上</h3><ul>
+<li>7~10月份是业务旺季，建议运营部门在这之前做好宣传准备，加大活动营销力度，增加广告投放</li>
+<li>在主要营销渠道（注册量前7的渠道）中Google的content渠道的转化率非常低（只有15%），建议运营部门评估此渠道的ROI，考虑是否优化此渠道的投放</li>
+<li>other_api,Google_seo,other_other,craigslist_other,facebook_seo这几个渠道转化率很高，都在40%以上，可以考虑增加这几个渠道的投放</li>
+<li>各渠道的SEO推广转化效果都挺好，SEO的获客成本较低，建议增加SEO相关资源的投入，考虑扩大SEO团队</li>
+<li>营销内容方面，建议优化表现较差的local ops,对不同的营销内容做对比分析，总结内容策划方面的方法论</li>
+</ul>
+<h3 id="8-3-转化漏斗方面"><a href="#8-3-转化漏斗方面" class="headerlink" title="8.3 转化漏斗方面"></a>8.3 转化漏斗方面</h3><ul>
+<li>活跃用户的注册环节流失率较高，建议用户调研，产品是否不能满足需求，或是注册流程有障碍</li>
+<li>注册用户的下单率很低，仅14%的注册用户下单，此环节是企业营收的关键步骤，建议围绕提升下单率开展工作</li>
+<li>下单到实际支付有约13%的用户流失，建议查明原因（是用户决策问题，还是支付流程问题，或是某些地区不支持某种支付类型）</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/30/航空公司客户价值分析/" rel="next" title="航空公司客户价值分析">
+                  <i class="fa fa-chevron-left"></i> 航空公司客户价值分析
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、分析背景和目的"><span class="nav-number">1.</span> <span class="nav-text">一、分析背景和目的</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1背景"><span class="nav-number">1.1.</span> <span class="nav-text">1.1背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-提出分析问题"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 提出分析问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、分析维度"><span class="nav-number">2.</span> <span class="nav-text">二、分析维度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-根据问题设立分析维度"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 根据问题设立分析维度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2各维度分析指标"><span class="nav-number">2.2.</span> <span class="nav-text">2. 2各维度分析指标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、数据清洗"><span class="nav-number">3.</span> <span class="nav-text">三、数据清洗</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-数据集描述"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 数据集描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-重复值处理"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 重复值处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3缺失值处理"><span class="nav-number">3.3.</span> <span class="nav-text">3.3缺失值处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-异常值处理"><span class="nav-number">3.4.</span> <span class="nav-text">3.3 异常值处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、用户画像分析"><span class="nav-number">4.</span> <span class="nav-text">四、用户画像分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1用户的性别分布特征"><span class="nav-number">4.1.</span> <span class="nav-text">4.1用户的性别分布特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-用户年龄分布"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 用户年龄分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-用户地区分布"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 用户地区分布</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、流量渠道分析"><span class="nav-number">5.</span> <span class="nav-text">五、流量渠道分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-每月新增用户"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 每月新增用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2不同用户端的注册量"><span class="nav-number">5.2.</span> <span class="nav-text">5.2不同用户端的注册量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3不同推广渠道的注册量及转化率"><span class="nav-number">5.3.</span> <span class="nav-text">5.3不同推广渠道的注册量及转化率</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-1渠道拉新方面"><span class="nav-number">5.3.1.</span> <span class="nav-text">5.3.1渠道拉新方面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-2渠道转化率方面"><span class="nav-number">5.3.2.</span> <span class="nav-text">5.3.2渠道转化率方面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-3-营销内容注册量方面"><span class="nav-number">5.3.3.</span> <span class="nav-text">5.3.3 营销内容注册量方面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-4-营销内容转化率方面"><span class="nav-number">5.3.4.</span> <span class="nav-text">5.3.4 营销内容转化率方面</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、转化漏斗分析"><span class="nav-number">6.</span> <span class="nav-text">六、转化漏斗分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1活跃用户占比"><span class="nav-number">6.1.</span> <span class="nav-text">6.1活跃用户占比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-注册用户占比"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 注册用户占比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3下单用户占比"><span class="nav-number">6.3.</span> <span class="nav-text">6.3下单用户占比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4实际支付用户占比"><span class="nav-number">6.4.</span> <span class="nav-text">6.4实际支付用户占比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5复购用户占比"><span class="nav-number">6.5.</span> <span class="nav-text">6.5复购用户占比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、分析结论汇总"><span class="nav-number">7.</span> <span class="nav-text">七、分析结论汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-用户画像"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 用户画像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-流量渠道"><span class="nav-number">7.2.</span> <span class="nav-text">7.2 流量渠道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-转化漏斗"><span class="nav-number">7.3.</span> <span class="nav-text">7.3 转化漏斗</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、分析建议"><span class="nav-number">8.</span> <span class="nav-text">八、分析建议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-关于用户画像方面"><span class="nav-number">8.1.</span> <span class="nav-text">8.1 关于用户画像方面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-关于推广渠道上"><span class="nav-number">8.2.</span> <span class="nav-text">8.2 关于推广渠道上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-转化漏斗方面"><span class="nav-number">8.3.</span> <span class="nav-text">8.3 转化漏斗方面</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">分叉的小腿毛</p>
+  <div class="site-description" itemprop="description">转行数据分析|啥都想学型选手</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/tuimer" title="GitHub &rarr; https://github.com/tuimer" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="/1296653792@qq.com" title="E-Mail &rarr; 1296653792@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 1996 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">分叉的小腿毛</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

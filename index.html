@@ -219,6 +219,244 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/28/Airbnb用户及业务数据分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="分叉的小腿毛">
+      <meta itemprop="description" content="转行数据分析|啥都想学型选手">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="花季少女秃头记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/11/28/Airbnb用户及业务数据分析/" class="post-title-link" itemprop="url">Airbnb用户及业务数据分析</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-28 09:32:45 / 修改时间：09:52:13" itemprop="dateCreated datePublished" datetime="2019-11-28T09:32:45+08:00">2019-11-28</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="一、分析背景和目的"><a href="#一、分析背景和目的" class="headerlink" title="一、分析背景和目的"></a>一、分析背景和目的</h2><h3 id="1-1背景"><a href="#1-1背景" class="headerlink" title="1.1背景"></a>1.1背景</h3><p>Airbnb成立于2008年，现已时间成为了短租民宿行业的巨头，并且强烈冲击着传统酒店行业的格局，Arbnb作为一款社区平台类产品，其业务遍布191个国家，并且经常出现在商业分析的优秀案例中，Airbnb在做好了产品体验，房源美感，名宿共享服务后，这款产品和背后的业务是否存在可以改进的地方？</p>
+<h3 id="1-2-提出分析问题"><a href="#1-2-提出分析问题" class="headerlink" title="1.2 提出分析问题"></a>1.2 提出分析问题</h3><p>一款好的产品的发展必然伴随着不断的迭代<br>在AARRR模型中，第一个A——用户获取，提高新用户获取的数量和质量是不断监测并优化的一个工作，哪些渠道的效果好，企业就要及时调整和增加此渠道的投入，哪些渠道效果不理想，就要及时找出原因并给出解决方案（<strong>渠道分析</strong>）<br>此外，转化漏斗分析也是数据分析环节的重要指标，可以从宏观角度了解整个产品的转化情况，企业针对流失率较高的漏斗环节进行改进，可以更有效的促进业务的发展（<strong>转化漏斗分析</strong>）</p>
+<p>针对以上分析目的，提出以下三个问题：</p>
+<ol>
+<li>Airbnb的目前用户群体的特征？（<strong>用户特征分析</strong>）</li>
+<li>Airbnb当前的推广渠道有哪些是优质的？有哪些是做的不好的且需要改进？（<strong>渠道分析</strong>）</li>
+<li>当前转化率和流失率中哪一个环节存在问题，或者说有较大进步空间？（<strong>转化漏斗分析</strong>）</li>
+</ol>
+<h2 id="二、分析维度"><a href="#二、分析维度" class="headerlink" title="二、分析维度"></a>二、分析维度</h2><h3 id="2-1-根据问题设立分析维度"><a href="#2-1-根据问题设立分析维度" class="headerlink" title="2.1 根据问题设立分析维度"></a>2.1 根据问题设立分析维度</h3><p>根据问题，提出三个分析维度：<br>用户画像分析<br>推广渠道分析<br>转化漏斗分析</p>
+<h3 id="2-2各维度分析指标"><a href="#2-2各维度分析指标" class="headerlink" title="2. 2各维度分析指标"></a>2. 2各维度分析指标</h3><ol>
+<li>用户画像分析</li>
+</ol>
+<ul>
+<li>用户性别的分布特征；</li>
+<li>用户年龄的分布特征；</li>
+<li>用户地区的分布特征。<br><strong>ps</strong>:<em>不同的产品对客户的不同属性敏感度不同，比如有些产品依赖于客户的学历/收入/行业等，此时对客户进行客户画像分析就需要加入这些维度的数据，使客户画像更清晰，更有价值</em></li>
+</ul>
+<ol start="2">
+<li>推广渠道分析</li>
+</ol>
+<ul>
+<li>每月新增用户</li>
+<li>不同用户端的注册量</li>
+<li>不同推广渠道的注册量</li>
+<li>不同营销内容的注册量</li>
+<li>不同推广渠道的转化率</li>
+<li>不同营销内容的转化率</li>
+</ul>
+<ol start="3">
+<li>转化漏斗分析</li>
+</ol>
+<ul>
+<li>注册用户占比</li>
+<li>活跃用户占比</li>
+<li>下单用户占比</li>
+<li>实际支付用户占比</li>
+<li>复购用户占比</li>
+</ul>
+<h2 id="三、数据清洗"><a href="#三、数据清洗" class="headerlink" title="三、数据清洗"></a>三、数据清洗</h2><h3 id="3-1-数据集描述"><a href="#3-1-数据集描述" class="headerlink" title="3.1 数据集描述"></a>3.1 数据集描述</h3><p>数据集名称: airbnb-recruiting-new-user-bookings<br>数据集来源：<a href="https://www.kaggle.com/c/airbnb-recruiting-new-user-bookings/data" target="_blank" rel="noopener">https://www.kaggle.com/c/airbnb-recruiting-new-user-bookings/data</a><br>数据集简介：此数据集使kaggle上的一个竞赛项目，主要用来制作目的地信息预测模型，此数据集住主要包含两张数据表，其中user表为用户数据，session为行为数据<br>数据集大小：<br>213451 * 16(user)、<br>10567737 * 6(sessions)</p>
+<p>熟悉数据：</p>
+<p>###用户表<br>id:用户ID<br>date_account_created:账户创建日期<br>timestamp_first_active:账户首次活跃时间戳（可能早于账户创建时间和首次预定日期）<br>date_first_booking：账户首次预定日期<br>‘gender’：性别<br>‘age’：年龄<br>‘signup_method’:注册方式<br>‘signup_flow’：用户注册时的来源页面<br>‘language’：用户语言偏好<br>‘affiliate_channel’：付费营销类型<br>‘affiliate_provider’：引流供应商<br>‘first_affiliate_tracked’:首次认知引流追踪（注册前与用户交互的第一个营销手段）<br>‘signup_app’：注册来源<br>‘first_device_type’：首次来访设备<br>‘first_browser’：首次浏览器<br>‘country_destination’：目的国家</p>
+<p>###session表（用户web会话日志）<br>user_id: 与用户表中的“id”列关联<br>action：动作（浏览，搜索、<br>action_type：动作类型（点击、<br>action_detail：动作细节<br>device_type：会话使用设备<br>secs_elapsed：持续时间</p>
+<h3 id="3-2-重复值处理"><a href="#3-2-重复值处理" class="headerlink" title="3.2 重复值处理"></a>3.2 重复值处理</h3><p>用户表中，每个用户生成一条记录，所以需排查id字段是否重复，<br><img src="https://upload-images.jianshu.io/upload_images/13996932-278b24375b8935e3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="重复数据"><br>经过查看无重复，不需要处理重复值</p>
+<h3 id="3-3缺失值处理"><a href="#3-3缺失值处理" class="headerlink" title="3.3缺失值处理"></a>3.3缺失值处理</h3><p>经查看缺失情况如下<br><img src="https://upload-images.jianshu.io/upload_images/13996932-61e5b53ed39b13f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="缺失数据"></p>
+<p><strong>缺失原因推测及处理</strong></p>
+<ul>
+<li>date_first_booking(首次预定日期）存在较多缺失，可以推测是因为客户还未下单</li>
+<li>age年龄缺失是因为客户未填写这部分信息</li>
+<li>first_device_type 注册来源渠道缺失是前端未追踪到这部分信息<br><strong>处理</strong><br>其他字段都很完整，后续是对每个字段进行统计分析，所以 保留有缺失的记录，在统计时对字段分别进行值和缺失的统计</li>
+</ul>
+<h3 id="3-3-异常值处理"><a href="#3-3-异常值处理" class="headerlink" title="3.3 异常值处理"></a>3.3 异常值处理</h3><ol>
+<li><strong>‘age’</strong>字段存在的异常数据很多，年龄大于100的有2K多条记录，还存在一部分，2013，2014这种年份数据，推测这些脏数据是用户随意填写造成</li>
+</ol>
+<ul>
+<li>处理：将年龄小于7或大于75的数据统一设为0</li>
+</ul>
+<ol start="2">
+<li><strong>‘gender’</strong>字段存在大量‘-unkonw-’和‘-’可以看作这些性别数据，客户未填写</li>
+</ol>
+<ul>
+<li>处理：将‘-unknown-’和‘-‘统一为’-unknown-‘</li>
+</ul>
+<h2 id="四、用户画像分析"><a href="#四、用户画像分析" class="headerlink" title="四、用户画像分析"></a>四、用户画像分析</h2><p>用户特征分为<strong>用户特点</strong>和<strong>用户行为</strong><br>用户特点：人口统计信息，性格爱好，需求特征等<br>用户行为：频率，习惯，消费等</p>
+<h3 id="4-1用户的性别分布特征"><a href="#4-1用户的性别分布特征" class="headerlink" title="4.1用户的性别分布特征"></a>4.1用户的性别分布特征</h3><p><img src="https://upload-images.jianshu.io/upload_images/13996932-8c57478d6bb559d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="用户性别占比"></p>
+<p>对gender字段进行统计，未知占45.0%，女性占比29.5%，男性占比25.5%<br>可以看出，男女用户占比差别不大，男性用户比女性用户多4%</p>
+<h3 id="4-2-用户年龄分布"><a href="#4-2-用户年龄分布" class="headerlink" title="4.2 用户年龄分布"></a>4.2 用户年龄分布</h3><p><img src="https://upload-images.jianshu.io/upload_images/13996932-574b18719ecf91db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="年龄分布"><br>从年龄分布的直方图中可以看出：<br>Airbnb的用户主要为“青中年”群体，其中用户数量最多的是80后（29岁~39岁）其次是90后，然后是70后。</p>
+<h3 id="4-3-用户地区分布"><a href="#4-3-用户地区分布" class="headerlink" title="4.3 用户地区分布"></a>4.3 用户地区分布</h3><p>（绘制语言树状图）<br><img src="https://upload-images.jianshu.io/upload_images/13996932-bea7b8a295c7d794.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="用户使用语言"></p>
+<ul>
+<li>airbnb产品遍布多个地区</li>
+<li>有超过96%的用户是英语国家（欧美），airbnb是2013年开始进入中国市场（此数据集采集止于2014年）所以此时中文用户数量排第二，但占比还是较小。</li>
+</ul>
+<h2 id="五、流量渠道分析"><a href="#五、流量渠道分析" class="headerlink" title="五、流量渠道分析"></a>五、流量渠道分析</h2><h3 id="5-1-每月新增用户"><a href="#5-1-每月新增用户" class="headerlink" title="5.1 每月新增用户"></a>5.1 每月新增用户</h3><p>（流量增长趋势图）<br><img src="https://upload-images.jianshu.io/upload_images/13996932-901fabe8ae10e23b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="每月新增用户趋势"></p>
+<ul>
+<li>airbnb的用户增长曲线健康，前期（2011年之前）增长平缓，2012年2月之后开始快速增长。</li>
+<li>此产品的新用户增长存在<strong>季节性规律</strong>：每年的7~10月份产品会迎来用户增长的高峰，推测为夏季（北半球）是旅游的旺季，而短租类产品正好是旅行消费的一种。</li>
+</ul>
+<h3 id="5-2不同用户端的注册量"><a href="#5-2不同用户端的注册量" class="headerlink" title="5.2不同用户端的注册量"></a>5.2不同用户端的注册量</h3><p><img src="https://upload-images.jianshu.io/upload_images/13996932-267c2943084cf253.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不同客户端注册量"></p>
+<ul>
+<li>用户主要使用电脑桌面客户端进行的注册，可能2014年手机并没有现在普及</li>
+<li>客户主要使用苹果设备</li>
+</ul>
+<h3 id="5-3不同推广渠道的注册量及转化率"><a href="#5-3不同推广渠道的注册量及转化率" class="headerlink" title="5.3不同推广渠道的注册量及转化率"></a>5.3不同推广渠道的注册量及转化率</h3><ul>
+<li>总体情况<br><img src="https://upload-images.jianshu.io/upload_images/13996932-bb401ee3fe12df93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不同渠道拉新及转化"></li>
+<li>direct（直接注册）的注册量最多，而我们主要分析目的是分析推广渠道的优劣，后续分析中排除direct</li>
+</ul>
+<p><strong>将分析聚焦到注册量大于300的营销渠道上</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13996932-285343360dbe50f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不同营销渠道拉新及转化"></p>
+<h4 id="5-3-1渠道拉新方面"><a href="#5-3-1渠道拉新方面" class="headerlink" title="5.3.1渠道拉新方面"></a>5.3.1渠道拉新方面</h4><ul>
+<li>推广渠道上，拉新量前7个渠道(共37个渠道）的注册量占总推广渠道来源的87%，符合二八法则</li>
+<li>表现最好的是Google的品牌竞价（sem）渠道，Google的非品牌竞价的注册量紧随其后居拉新第二位</li>
+</ul>
+<h4 id="5-3-2渠道转化率方面"><a href="#5-3-2渠道转化率方面" class="headerlink" title="5.3.2渠道转化率方面"></a>5.3.2渠道转化率方面</h4><ul>
+<li>整体渠道转化率均不错，多数渠道的转化率都在30%以上</li>
+<li>主要渠道（注册量前7名的渠道）中，Google_content的转化率存在异常，转化率为15.6%，明显低于其他主要渠道的转化率</li>
+<li>other_api、google_seo、other_other三个渠道转化率表现优秀，均大于40%</li>
+</ul>
+<p>##5.4 不同营销内容的注册量及转化率<br><img src="https://upload-images.jianshu.io/upload_images/13996932-09563e69f12d7b55.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li>注册量排名第一的营销内容为untracked(未跟踪到)，以及部份追踪数据为NULL，产品的数据跟踪异常</li>
+</ul>
+<p><strong>将分析聚焦到有追踪数据的营销内容上</strong><br><img src="https://upload-images.jianshu.io/upload_images/13996932-9ed7d60a8df5b83f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="5-3-3-营销内容注册量方面"><a href="#5-3-3-营销内容注册量方面" class="headerlink" title="5.3.3 营销内容注册量方面"></a>5.3.3 营销内容注册量方面</h4><ul>
+<li>从追踪到的数据来看，linked和omg的注册量和转化率均表现优异，两者带来的注册量占总营销内容来带的注册量的90%以上</li>
+</ul>
+<h4 id="5-3-4-营销内容转化率方面"><a href="#5-3-4-营销内容转化率方面" class="headerlink" title="5.3.4 营销内容转化率方面"></a>5.3.4 营销内容转化率方面</h4><ul>
+<li>整体上转化率表现不错，除local ops 其他营销内容的转化率均在34以上</li>
+<li>marketing转化率达45%</li>
+</ul>
+<h2 id="六、转化漏斗分析"><a href="#六、转化漏斗分析" class="headerlink" title="六、转化漏斗分析"></a>六、转化漏斗分析</h2><p>对session表的user_id进行统计，此次进行用户分析的总用户数为：135484</p>
+<h3 id="6-1活跃用户占比"><a href="#6-1活跃用户占比" class="headerlink" title="6.1活跃用户占比"></a>6.1活跃用户占比</h3><p>定义活跃用户为操作产品的次数大于10次的用户<br>活跃用户数为：111386<br>活跃用户占比= 活跃用户数/用户总数 = 82.2%</p>
+<h3 id="6-2-注册用户占比"><a href="#6-2-注册用户占比" class="headerlink" title="6.2 注册用户占比"></a>6.2 注册用户占比</h3><p>注册用户数量：73815<br>注册用户占比 = 注册用户数/总用户数 = 54.4%</p>
+<h3 id="6-3下单用户占比"><a href="#6-3下单用户占比" class="headerlink" title="6.3下单用户占比"></a>6.3下单用户占比</h3><p>下单用户数：10367<br>下单用户占比= 下单用户数量/总用户数量 = 7.7%</p>
+<h3 id="6-4实际支付用户占比"><a href="#6-4实际支付用户占比" class="headerlink" title="6.4实际支付用户占比"></a>6.4实际支付用户占比</h3><p>实际支付用户总数量 ：9019<br>付款用户占比 =实际支付用户总数量/用户总数量 = 6.7%</p>
+<h3 id="6-5复购用户占比"><a href="#6-5复购用户占比" class="headerlink" title="6.5复购用户占比"></a>6.5复购用户占比</h3><p>复购用户总数量 ：5447<br>复购用户占比 = 复购用户总数量 / 用户总数量 = 4.0204%<br><img src="https://upload-images.jianshu.io/upload_images/13996932-0193f91150163db5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="用户转化漏斗"></p>
+<ul>
+<li>从转化漏斗图可以看出，注册用户到下单的转化率为14.0%，流失率较高</li>
+<li>活跃用户的注册率为66.3%，可进一步提高</li>
+<li>下单到实际支付有约13.0%的流失</li>
+<li>复购率达60.4%，表现良好</li>
+</ul>
+<h2 id="七、分析结论汇总"><a href="#七、分析结论汇总" class="headerlink" title="七、分析结论汇总"></a>七、分析结论汇总</h2><h3 id="7-1-用户画像"><a href="#7-1-用户画像" class="headerlink" title="7.1 用户画像"></a>7.1 用户画像</h3><ul>
+<li><strong>用户性别</strong>、从有性别记录的数据来看，用户中男女性别占比差别不大，男性比女性占比仅多4%</li>
+<li><strong>用户年龄</strong>、用户年龄段集中在青中年，最多的是80后，其次为90后，然后70后</li>
+<li><strong>用户分布</strong>、用户绝大部分来自使用英语的欧美国家，占比高达96%以上，其次是中国</li>
+</ul>
+<h3 id="7-2-流量渠道"><a href="#7-2-流量渠道" class="headerlink" title="7.2 流量渠道"></a>7.2 流量渠道</h3><ul>
+<li>2011年之前，用户增长缓慢，2012年开始用户迅速增长</li>
+<li>用户增长呈现一定季节性，7~10月份是旅游旺季，出现用户增长峰值</li>
+<li>PC端和移动端用户均是苹果产品占优势</li>
+<li>直接从应用市场下载注册的用户占64.4%</li>
+<li>排名前7的营销渠道（共38个渠道）的拉新占所用渠道拉新的90%以上</li>
+</ul>
+<p><strong>优质渠道</strong>：<br>Google的seo和seo_no_brand 拉新和转化都表现较好</p>
+<p><strong>表现不佳的渠道</strong>：</p>
+<ul>
+<li>Google的content转化出现异常，明显低于其他主要渠道较多</li>
+<li>other_api 转化率表现不佳</li>
+<li>各供应商的content渠道转化率都较低在10%左右，其中gsp的content渠道转化率最低，约8.2%</li>
+</ul>
+<p><strong>营销内容方面</strong>:</p>
+<ul>
+<li>前端统计功能异常，未追踪到的用户达50%以上</li>
+<li>linked和omg两个内容表现优异，带来的用户占所有营销内容带来的用户的90%以上</li>
+<li>local ops带来的转化率最低</li>
+</ul>
+<h3 id="7-3-转化漏斗"><a href="#7-3-转化漏斗" class="headerlink" title="7.3 转化漏斗"></a>7.3 转化漏斗</h3><ul>
+<li>airbnb用户转化漏斗中注册用户到下单这个环节的转化率仅14%</li>
+<li>活跃用户的注册率可以有进一步优化</li>
+<li>活跃和复购环节表现良好<br>#八、业务和产品上的建议</li>
+</ul>
+<h2 id="八、分析建议"><a href="#八、分析建议" class="headerlink" title="八、分析建议"></a>八、分析建议</h2><h3 id="8-1-关于用户画像方面"><a href="#8-1-关于用户画像方面" class="headerlink" title="8.1 关于用户画像方面"></a>8.1 关于用户画像方面</h3><ul>
+<li>根据用户年龄特征分布，建议投放广告时主要针对20~40岁年龄段的目标用户</li>
+<li>在用户年龄字段出现较多异常值，建议产品开发设置用户输入信息的验证</li>
+</ul>
+<h3 id="8-2-关于推广渠道上"><a href="#8-2-关于推广渠道上" class="headerlink" title="8.2 关于推广渠道上"></a>8.2 关于推广渠道上</h3><ul>
+<li>7~10月份是业务旺季，建议运营部门在这之前做好宣传准备，加大活动营销力度，增加广告投放</li>
+<li>在主要营销渠道（注册量前7的渠道）中Google的content渠道的转化率非常低（只有15%），建议运营部门评估此渠道的ROI，考虑是否优化此渠道的投放</li>
+<li>other_api,Google_seo,other_other,craigslist_other,facebook_seo这几个渠道转化率很高，都在40%以上，可以考虑增加这几个渠道的投放</li>
+<li>各渠道的SEO推广转化效果都挺好，SEO的获客成本较低，建议增加SEO相关资源的投入，考虑扩大SEO团队</li>
+<li>营销内容方面，建议优化表现较差的local ops,对不同的营销内容做对比分析，总结内容策划方面的方法论</li>
+</ul>
+<h3 id="8-3-转化漏斗方面"><a href="#8-3-转化漏斗方面" class="headerlink" title="8.3 转化漏斗方面"></a>8.3 转化漏斗方面</h3><ul>
+<li>活跃用户的注册环节流失率较高，建议用户调研，产品是否不能满足需求，或是注册流程有障碍</li>
+<li>注册用户的下单率很低，仅14%的注册用户下单，此环节是企业营收的关键步骤，建议围绕提升下单率开展工作</li>
+<li>下单到实际支付有约13%的用户流失，建议查明原因（是用户决策问题，还是支付流程问题，或是某些地区不支持某种支付类型）</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/30/航空公司客户价值分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -656,7 +894,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
